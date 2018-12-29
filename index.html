@@ -1,0 +1,76 @@
+<html>
+<head>
+<link rel="stylesheet" href="resources/css/styles.css">
+<script src="resources/js/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script>
+	var year = new Date().getFullYear();
+    CountDownTimer('December 25 ' + year, 'christmas-counter');
+
+    function CountDownTimer(dt, id)
+    {
+        var end = new Date(dt);
+
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+        var timer;
+
+        function showRemaining() {
+            var now = new Date();
+            var distance = end - now;
+            
+            if (end.toDateString() == now.toDateString()) {
+				console.log('Its xmas');
+				clearInterval(timer);
+				document.getElementById(id).innerHTML = '0 days ';
+				var html = '';
+				$('.merry_xmas').removeClass('hidden');
+				return;
+			}
+            
+            
+            if (distance < 0) {
+				end.setFullYear(year + 1);
+				distance = end - now;
+            }
+            var days = Math.floor(distance / _day);
+            var hours = Math.floor((distance % _day) / _hour);
+            var minutes = Math.floor((distance % _hour) / _minute);
+            var seconds = Math.floor((distance % _minute) / _second);
+
+            document.getElementById(id).innerHTML = days + ' days ';
+            document.getElementById(id).innerHTML += hours + ' hrs ';
+            document.getElementById(id).innerHTML += minutes + ' mins ';
+            document.getElementById(id).innerHTML += seconds + ' secs';
+        }
+		
+        timer = setInterval(showRemaining, 1000);
+    }
+
+</script>
+
+</head>	
+<body>
+</body>
+	<div class='container'>
+		<div class='christmas-box mx-auto'>
+			<div class='page_title row mx-auto'>
+				<h1 class='mx-auto'>How Many Days Until Christmas?</h1>
+			</div>
+			<div class='row countdown_row mx-auto'>
+				<div class='mx-auto'>
+					<h2>There are <span id='christmas-counter' ></span> until Christmas.</h2>
+				</div>
+				
+			</div>
+			<div class='row merry_xmas mx-auto hidden'>
+				<h2 class='mx-auto'>Merry Christmas!</h2>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
